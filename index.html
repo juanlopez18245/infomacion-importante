@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Casi listo!</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+    .container {
+      text-align: center;
+      padding: 40px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-width: 90%;
+      width: 350px;
+    }
+    .title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    .subtext {
+      color: #7f8c8d;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+    .loader {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 20px auto;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #7f8c8d;
+    }
+    .button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">¡Casi listo!</div>
+    <div class="subtext">Estamos cargando la página con las mejores oportunidades para ti...</div>
+    <div class="loader"></div>
+    <div class="message">Si no ves nada en unos segundos, haz clic en el botón.</div>
+    <a class="button" onclick="irAlContenido()">Acceder ahora</a>
+  </div>
+
+  <script>
+    (function() {
+      const destino = "https://tutrabajonuevo.com/";
+      const ua = navigator.userAgent.toLowerCase();
+      const isAndroid = ua.includes("android");
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+
+      function irAlContenido() {
+        if (isAndroid) {
+          const intentUrl = `intent://${destino.replace(/^https?:\\/\\//, "")}#Intent;scheme=https;package=com.android.chrome;end;`;
+          window.location.href = intentUrl;
+          setTimeout(() => {
+            window.location.href = destino;
+          }, 1000);
+        } else {
+          window.location.href = destino;
+        }
+      }
+
+      setTimeout(irAlContenido, 3000);
+    })();
+  </script>
+</body>
+</html>
